@@ -1,0 +1,22 @@
+project.description = 'A Menu-driven Log Analyzer'
+
+
+apply plugin: 'groovy'
+ 
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.codehaus.groovy:groovy-all:2.2.1'
+	testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+task compile << {
+	def src = ['MenuApp.groovy', 'LogBrowser.groovy', 'AppConsole.groovy', 'LogBrowserSwingApp.groovy']
+	src.each { "groovyc ./${it}".execute() }
+}
+
+task run(dependsOn: compile) << {
+	"groovy LogBrowserSwingApp".execute()
+}
